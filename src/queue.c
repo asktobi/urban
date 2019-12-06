@@ -6,29 +6,31 @@
 #include <stdlib.h>
 #include "queue.h"
 
-queue_t * new_queue(void * data)
+queue_e_t * new_queue_e(data_t * data)
 {
-	queue_t * new_queue = (queue_t *) malloc(sizeof(queue_t));
-	new_queue->data = data;
-	pthread_mutex_init(&new_queue->lock, NULL);
-	new_queue->next = NULL;
+	queue_e_t * new_q_e = (queue_e_t *) malloc(sizeof(queue_e_t));
+	pthread_mutex_init( &new_q_e->lock, NULL);
+	new_q_e->data       = data;
+	new_q_e->next       = NULL;
 
-	return new_queue;
+	return new_q_e;
 }
 
-void free_queue(queue_t * queue)
+
+queue_t * new_queue()
 {
-	pthread_mutex_destroy( &queue->lock );
-	free(queue);
+	queue_t * new_q = (queue_t *) malloc(sizeof(queue_t));
+	pthread_mutex_init(&new_q->lock, NULL);
+	new_q->root = NULL;
+
+	return new_q;
 }
 
-queue_t * push_queue(queue_t * queue, void * data)
+void push_queue(queue_t * q, data_t * data)
 {
-	pthread_mutex_lock(   &queue->lock );
-	queue->next = new_queue(data);
-	pthread_mutex_unlock( &queue->lock );
+	pthread_mutex_lock(&q->lock);
 
-	return queue->next;
+
 }
 
 queue_t * get_queue(queue_t * queue, void * data)

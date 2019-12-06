@@ -4,19 +4,32 @@
 
 #include <pthread.h>
 
+#include <data.h>
+
+// Structs
+
+typedef struct QUEUE_ELEMENT_T
+{
+	data_t                 * data;
+	pthread_mutex_t          lock;
+	struct QUEUE_ELEMENT_T * next;
+
+} queue_e_t;
+
+
 typedef struct QUEUE_T
 {
-	void * data;
-	pthread_mutex_t lock;
-	struct QUEUE_T * next;
+	pthread_mutex_t          lock;
+	struct QUEUE_ELEMENT_T * root;
+
 } queue_t;
 
 // Functions
 
-queue_t * new_queue(void * data);
-void free_queue(queue_t * queue);
-queue_t * push_queue(queue_t * queue, void * data);
-queue_t * get_queue(queue_t * queue, void * data);
+queue_e_t * new_queue_e(data_t * data);
+queue_t   * new_queue();
 
+void   push_queue(queue_t * q, data_t * data);
+void * pull_queue(queue_t * q);
 
 #endif
