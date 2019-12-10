@@ -1,6 +1,8 @@
 #ifndef __DATA_H__
 #define __DATA_H__
 
+// A library for making any data threadsafe
+
 #include <pthread.h>
 #include <stdint.h>
 
@@ -15,6 +17,7 @@ typedef struct DATA_T
 
 } data_t;
 
+/*
 typedef struct LINKED_DATA_T
 {
 	pthread_rwlock_t       lock;
@@ -31,14 +34,22 @@ typedef struct DOUBLE_LINKED_DATA_T
 	struct DOUBLE_LINKED_DATA_T * back;
 
 } lldata_t;
+*/
+
 
 // Functions
 
-data_t   * new_data(   void   * data, size_t size);
+data_t * new_data(      void   * data, size_t size);
+data_t * dup_data(      data_t * data);
+void   * get_data(      data_t * data);
+size_t   get_data_size( data_t * data);
+void     link_data(     data_t * data);
+
+/*
+
 ldata_t  * new_ldata(  data_t * data);
 lldata_t * new_lldata( data_t * data);
 
-void   * get_data(   data_t   * data);
 data_t * get_ldata(  ldata_t  * element);
 data_t * get_lldata( lldata_t * element);
 
@@ -60,6 +71,6 @@ void insert_lldata( data_t * data2insert);
 void append_ldata(  data_t * data2append);
 void append_lldata( data_t * data2append);
 
-
+*/
 
 #endif
