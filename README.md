@@ -1,6 +1,6 @@
 # Urban
 
-	Urban is a Editor
+	Urban is a project ^^
 
 
 ## dir structure 
