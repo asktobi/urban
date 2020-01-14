@@ -3,6 +3,39 @@
 #include <ncurses.h>
 #include <string.h>
 
+typedef struct file_t
+{
+	char path;
+	char ***file;
+
+
+} file_t;
+
+
+typedef struct line_t 
+{
+	char  * str_buffer;
+	char ** line_buffer;
+	
+	size_t str_max    
+	size_t line_max; 
+	size_t str_length;
+	size_t line_length;
+
+} line_t;
+
+line_t * new_line(size_t line_max, size_t str_max)
+{
+	line_t * line = (line_t *) malloc(sizeof(line_t));
+	line->str_max     = 256;
+	line->line_max     = 256;
+	line->str_length  = 0;
+	line->line_length  = 0;
+
+	line->line_buffer = malloc
+
+i	return line;
+}
 
 int main(int argc,char ** argv)
 {
@@ -57,27 +90,21 @@ int main(int argc,char ** argv)
 
 				case ' ':
 
-					if (str_current != 0 && str_buffer[str_current + 1] != '\0')
+					if (line_buffer[line_current] == NULL)
 					{
-						printw("T");
-						if (line_buffer[line_current] == NULL)
-						{
-							str_length = strlen(str_buffer);
-							line_buffer[line_current] = (char *) malloc(sizeof(char) * str_length);
-							memcpy(line_buffer[line_current], str_buffer, str_length);
-						
-							line_current++;
-							printw(" ");
+						str_length = strlen(str_buffer);
+						line_buffer[line_current] = (char *) malloc(sizeof(char) * str_length);
+						memcpy(line_buffer[line_current], str_buffer, str_length);
 
-						} else
-						{
-							printw("TODO: implement word shifting \n");
+						line_current++;
+						printw(" ");
 
-						}
 					} else
 					{
-						printw("new line alreay\n");
+						printw("TODO: implement word shifting \n");
+
 					}
+					break;
 				case 3:
 					echo();
 					endwin;
@@ -86,7 +113,7 @@ int main(int argc,char ** argv)
 				default:
 						
 					printw("\n[%s] Cant interprete : %d -> '%c'\n", argv[0], in, (char) in );
-
+					break;
 			}
 		}
 		
