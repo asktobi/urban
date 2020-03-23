@@ -11,7 +11,6 @@ typedef struct file_t
 
 } file_t;
 
-
 typedef struct line_t 
 {
 	char  * str_buffer;
@@ -34,7 +33,7 @@ line_t * new_line(size_t line_max, size_t str_max)
 
 	line->line_buffer = malloc
 
-i	return line;
+	return line;
 }
 
 int main(int argc,char ** argv)
@@ -70,7 +69,7 @@ int main(int argc,char ** argv)
 		{
 			switch(in)
 			{
-				case '\n':
+				case '\n': //Enter
 					
 					if (line_buffer[line_current] == NULL)
 					{
@@ -88,7 +87,7 @@ int main(int argc,char ** argv)
 					}
 					break;
 
-				case ' ':
+				case ' ': //New word
 
 					if (line_buffer[line_current] == NULL)
 					{
@@ -105,7 +104,7 @@ int main(int argc,char ** argv)
 
 					}
 					break;
-				case 3:
+				case 3: //STRG-C
 					echo();
 					endwin;
 					return 0;
